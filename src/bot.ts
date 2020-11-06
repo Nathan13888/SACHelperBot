@@ -14,12 +14,15 @@ export namespace Bot {
 
     Config.init();
 
+    Logger.log('CONNECTING TO API');
+
     await api.login(token);
 
     api.on('ready', async () => {
       Logger.log(`${Config.BOTNAME} has started!`);
       Logger.log(`Connected as ${api.user.tag}`);
       Logger.log('Current version: ' + Config.getVersion());
+      Logger.log(`Prefix: \`${Config.PREFIX}\``);
 
       Logger.log('Setting up other config');
 

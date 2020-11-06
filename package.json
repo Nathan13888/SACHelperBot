@@ -7,7 +7,7 @@
   "license": "AGPL-3.0-or-later",
   "scripts": {
     "start": "npm run build && pm2 start --merge-logs --source-map-support . --name \"POLLBOT\" && pm2 logs SH",
-    "dev": "pm2 start --merge-logs --source-map-support . --watch --name \"POLLBOT\" && pm2 monit SH",
+    "dev": "pm2 start --merge-logs --source-map-support . --watch --name \"SH\" && pm2 monit SH",
     "stop": "pm2 stop SH",
     "restart": "npm run stop && npm run dev",
     "nodemon": "nodemon -r source-map-support/register .",

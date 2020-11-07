@@ -30,6 +30,7 @@ export namespace Config {
 
   export namespace ID {
     export const SUB = ENV.SUBROLE;
+    export const ANN = ENV.ANNCHAN;
   }
 
   // VERSION

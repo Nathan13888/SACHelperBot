@@ -9,14 +9,26 @@ import {Counter} from './counter.service';
 import {Subscribe} from '../commands/subscribe';
 import {Unsubscribe} from '../commands/unsubscribe';
 import {Help} from '../commands/help';
+import {Utils} from '../utils/utils';
+import {Announcements} from './announcements.service';
+import { Test } from '../commands/test';
 export namespace CommandService {
 
   export const commands: Array<Command> = [];
 
-  const filter = (msg) => {
+  const filter = (msg: Message) => {
     if (msg.author.bot) return; // bots
     if (msg.content.substring(0, 2) === Config.PREFIX) {
       parseCommand(msg);
+    } else {
+      // ANNOUNCEMENTS FILTER
+      if (msg.channel.id===Config.ID.ANN) {
+        const notif = Announcements.getNotifEmbed(msg);
+        msg.guild.members.cache.forEach((mem) => {
+          // send notification to each member
+          Utils.sendDM(notif, mem.user);
+        });
+      }
     }
   };
 
@@ -31,6 +43,7 @@ export namespace CommandService {
     commands.push(new Uptime());
     commands.push(new Subscribe());
     commands.push(new Unsubscribe());
+    commands.push(new Test());
   }
 
   export function findCommand(cmd: string): Command {

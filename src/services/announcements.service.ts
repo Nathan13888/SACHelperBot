@@ -11,7 +11,7 @@ export namespace Announcements {
         .setThumbnail(msg.author.displayAvatarURL())
         .setDescription(`You may unsubscribe by running \`unsub\`
 on the SAC Discord Server.`)
-        .addField('Preview:', preview)
+        .addField('Preview:', '```\n'+preview+'\n```')
         .setFooter(`Announcement from ${msg.member.displayName}`,
           Bot.api.user.displayAvatarURL())
         .setTimestamp();

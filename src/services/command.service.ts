@@ -11,7 +11,7 @@ import {Unsubscribe} from '../commands/unsubscribe';
 import {Help} from '../commands/help';
 import {Utils} from '../utils/utils';
 import {Announcements} from './announcements.service';
-import { Test } from '../commands/test';
+import {Test} from '../commands/test';
 export namespace CommandService {
 
   export const commands: Array<Command> = [];
@@ -26,7 +26,9 @@ export namespace CommandService {
         const notif = Announcements.getNotifEmbed(msg);
         msg.guild.members.cache.forEach((mem) => {
           // send notification to each member
-          Utils.sendDM(notif, mem.user);
+          if (!msg.author.bot) {
+            Utils.sendDM(notif, mem.user);
+          }
         });
       }
     }

@@ -8,6 +8,7 @@ import {Config} from '../config';
 import {Counter} from './counter.service';
 import {Subscribe} from '../commands/subscribe';
 import {Unsubscribe} from '../commands/unsubscribe';
+import {Help} from '../commands/help';
 export namespace CommandService {
 
   export const commands: Array<Command> = [];
@@ -25,6 +26,7 @@ export namespace CommandService {
     // Bot.api.on('messageUpdate', filter);
 
     // COMMANDS
+    commands.push(new Help());
     commands.push(new Version());
     commands.push(new Uptime());
     commands.push(new Subscribe());

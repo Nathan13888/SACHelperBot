@@ -28,6 +28,10 @@ export namespace Config {
   export const BOTNAME: string = 'SAC Helper';
   export const COUNTERTOKEN: string = 'sachelper';
 
+  export namespace ID {
+    export const SUB = ENV.SUBROLE;
+  }
+
   // VERSION
   const version = require('../package.json').version;
   export function getVersion(): string {

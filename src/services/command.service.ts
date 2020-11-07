@@ -6,22 +6,29 @@ import {Version} from '../commands/version';
 import {Message} from 'discord.js';
 import {Config} from '../config';
 import {Counter} from './counter.service';
+import {Subscribe} from '../commands/subscribe';
+import {Unsubscribe} from '../commands/unsubscribe';
 export namespace CommandService {
 
   export const commands: Array<Command> = [];
 
+  const filter = (msg) => {
+    if (msg.author.bot) return; // bots
+    if (msg.content.substring(0, 2) === Config.PREFIX) {
+      parseCommand(msg);
+    }
+  };
+
   export async function registerCommands() {
     // TODO: add command cooldown
-    Bot.api.on('message', async (msg) => {
-      if (msg.author.bot) return; // bots
-      if (msg.content.substring(0, 2) === Config.PREFIX) {
-        parseCommand(msg);
-      }
-    });
+    Bot.api.on('message', filter);
+    // Bot.api.on('messageUpdate', filter);
 
     // COMMANDS
     commands.push(new Version());
     commands.push(new Uptime());
+    commands.push(new Subscribe());
+    commands.push(new Unsubscribe());
   }
 
   export function findCommand(cmd: string): Command {

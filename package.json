@@ -13,6 +13,8 @@
     "nodemon": "nodemon -r source-map-support/register .",
     "build": "tsc",
     "build:watch": "tsc --watch",
+    "docker:build": "docker build -t sh .",
+    "docker:run": "docker run --detach --name sachelper sh:latest",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint \"**/*.ts\" \"**/*.js\"",
     "lint:fix": "npm run lint -- --fix",
